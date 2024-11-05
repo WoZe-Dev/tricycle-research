@@ -1,4 +1,4 @@
-# Product Image Comparison
+# Comparaison d'images de produits
 
 Il s'agit d'une application Web Flask simple permettant de comparer les images de produits téléchargées avec les images existantes stockées sur un serveur ou un api.
 
