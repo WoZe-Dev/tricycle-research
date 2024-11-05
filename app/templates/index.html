@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche d'image par comparaison</title>
+    <style>
+        /* Style global pour un design moderne et épuré */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 20px;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        form {
+            width: 90%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #uploadButton {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        #uploadButton:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        #loadingIndicator {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #007BFF;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        li {
+            background-color: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        li p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+            word-break: break-word;
+        }
+
+        li img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            form {
+                padding: 15px;
+                width: 95%;
+            }
+
+            #uploadButton {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            li p {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Recherche d'image par comparaison</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" id="file" accept="image/*" required>
+        <button type="button" id="uploadButton">Uploader et comparer</button>
+
+        <div id="loadingIndicator"></div>
+
+        <script>
+            document.getElementById('uploadButton').addEventListener('click', function() {
+                document.getElementById('file').click();
+            });
+
+            document.getElementById('file').addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    document.getElementById('loadingIndicator').style.display = 'block';
+                    this.form.submit();
+                }
+            });
+        </script>
+    </form>
+
+    {% if results %}
+    <ul>
+        {% for result in results %}
+            <li>
+                <p>{{ result[0] }} (Similarité : {{ result[1] }})</p>
+                <img src="{{ url_for('serve_image', filename=result[0]) }}" alt="{{ result[0] }}">
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
