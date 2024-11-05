@@ -1,14 +1,14 @@
 # Product Image Comparison
 
-This is a simple Flask web application to compare uploaded product images with existing images stored on a server.
+Il s'agit d'une application Web Flask simple permettant de comparer les images de produits téléchargées avec les images existantes stockées sur un serveur ou un api.
 
 ## Features
-- Upload an image of a product.
-- Compare the uploaded image with stored images using OpenCV (ORB feature detection).
-- Return whether the product is already in the database or not.
+- Téléchargez une image d'un produit.
+- Comparez l'image téléchargée avec les images stockées à l'aide d'OpenCV (détection de fonctionnalités ORB)
+- Renvoie si le produit est déjà dans la base de données ou non.
 
 ## How to run
-1. Install the dependencies: `pip install -r requirements.txt`
+1. Install : `pip install -r requirements.txt`
 2. Run the Flask app: `python app.py`
 
 ## Requirements
