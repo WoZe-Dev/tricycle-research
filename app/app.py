@@ -125,7 +125,7 @@ def fetch_image_urls(base_url, depth=0, max_depth=3):
 
 # Télécharger et traiter toutes les images au démarrage
 def download_all_images():
-    base_url = "51.83.79.4:8080/img/"
+    base_url = ""
     image_urls = fetch_image_urls(base_url)
     logging.info(f"Nombre d'images trouvées : {len(image_urls)}")
     with concurrent.futures.ThreadPoolExecutor() as executor:
