@@ -2,6 +2,8 @@
 
 Il s'agit d'une application Web Flask simple permettant de comparer les images de produits téléchargées avec les images existantes stockées sur un serveur ou un api.
 
+web : https://voxio.fr/tricycle-office-img
+
 ## Caractéristiques
 - Téléchargez une image d'un produit.
 - Comparez l'image téléchargée avec les images stockées à l'aide d'OpenCV (détection de fonctionnalités ORB)
